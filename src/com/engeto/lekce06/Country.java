@@ -1,19 +1,20 @@
 package com.engeto.lekce06;
+import java.util.Comparator;
 
-public class Country {
+public class Country implements Comparable<Country>{
     private String shortName;
     private String countryName;
-    private int tax; // mohl by byt nejspíš double, kdyby bylo větší množství států nebo možnost pro přidání, prozatím nechám int
+    private Integer tax;            // Integer namísto obyč. intu kvůli compareTo
     private String reducedTax;
     private boolean specialTax;
 
-//    public Country(String shortName, String countryName, int tax, String reducedTax, boolean specialTax) {
-//        this.shortName = shortName;
-//        this.countryName = countryName;
-//        this.tax = tax;
-//        this.reducedTax = reducedTax;
-//        this.specialTax = specialTax;
-//    }
+    public Country(String shortName, String countryName, int tax, String reducedTax, boolean specialTax) {
+        this.shortName = shortName;
+        this.countryName = countryName;
+        this.tax = tax;
+        this.reducedTax = reducedTax;
+        this.specialTax = specialTax;
+    }
 
     public String getShortName() {
         return shortName;
@@ -31,11 +32,11 @@ public class Country {
         this.countryName = countryName;
     }
 
-    public int getTax() {
+    public Integer getTax() {
         return tax;
     }
 
-    public void setTax(int tax) {
+    public void setTax(Integer tax) {
         this.tax = tax;
     }
 
@@ -53,5 +54,16 @@ public class Country {
 
     public void setSpecialTax(boolean specialTax) {
         this.specialTax = specialTax;
+    }
+
+
+    @Override
+    public int compareTo(Country o) {
+        return 0;
+    }
+
+    @Override
+    public String toString() {
+        return countryName + " ("+ shortName + "): " + tax + "% \n";
     }
 }
