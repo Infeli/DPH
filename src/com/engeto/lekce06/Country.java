@@ -1,5 +1,4 @@
 package com.engeto.lekce06;
-import java.util.Comparator;
 
 public class Country implements Comparable<Country>{
     private String shortName;

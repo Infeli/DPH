@@ -1,13 +1,13 @@
 package com.engeto.lekce06;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.*;
 import java.util.*;
 
 import static java.lang.Integer.parseInt;
 
-public class CountryList{
+public class CountryList {
+
+    static Scanner scanner = new Scanner(System.in);
 
     private List<Country> countryList = new ArrayList<>(); // tvorba kolekce
 
@@ -34,8 +34,6 @@ public class CountryList{
                 tax = parseInt(items[2]);
                 reducedTax = items[3];
                 specialTax = Boolean.parseBoolean(items[4]);
-                // System.out.println(nextLine);  // výpis všech
-
 
                 result.countryList.add(new Country(shortName, countryName, tax, reducedTax, specialTax));
 
@@ -54,29 +52,43 @@ public class CountryList{
         return result;
     }
 
-    public List<Country> highTax(){
-        List<Country> result = new ArrayList<>();
-        Collections.sort(countryList, new Comparator<Country>() {
-            @Override
-            public int compare(Country o1, Country o2) {
-                return o1.getTax().compareTo(o2.getTax());
-            }
-        }.reversed());
 
-        for(Country country : countryList){
-            if(country.getTax() > 20 ){
-                System.out.println(country.getCountryName() + " (" + country.getShortName() + "): " + country.getTax() + "%");
+    public void createCopy (String filename, String delimiter){
+        try(BufferedWriter writer = new BufferedWriter(new FileWriter(filename))){
+            List<Country> result = new ArrayList<>();
+            Collections.sort(countryList, new Comparator<Country>() {
+                @Override
+                public int compare(Country o1, Country o2) {
+                    return o1.getTax().compareTo(o2.getTax());
+                }
+            }.reversed());
+
+            System.out.println("Write VAT: ");
+            Integer input = Integer.valueOf(scanner.nextInt());
+
+
+            for (Country country : countryList) {
+                if (country.getTax() > input) {
+                    System.out.println(country.getCountryName() + " (" + country.getShortName() + "): " + country.getTax() + "%");
+                    writer.write(country.getCountryName() + " (" + country.getShortName() + "): " + country.getTax() + "% \n");
+                }
             }
-        }
-        System.out.println("=========================");
-        for(Country country : countryList){
-            if(country.getTax() < 20 ){
-                System.out.print(country.getShortName()+ ", ");
+            System.out.println("=========================");
+            writer.write("=========================\n");
+            for (Country country : countryList) {
+                if (country.getTax() <= input) {
+                    System.out.print(country.getShortName() + ", ");
+                    writer.write(country.getShortName() + ", ");
+                }
             }
+
+        }catch (Exception ex){
+            ex.getMessage();
+
         }
-        return result;
+
+
+
     }
-
-
 
 }
