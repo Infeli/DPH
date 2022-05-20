@@ -7,7 +7,8 @@ import static java.lang.Integer.parseInt;
 
 public class CountryList {
 
-    static Scanner scanner = new Scanner(System.in);
+    private static Scanner scanner = new Scanner(System.in);
+    private Integer input;
 
     private List<Country> countryList = new ArrayList<>(); // tvorba kolekce
 
@@ -46,7 +47,7 @@ public class CountryList {
         }
 
         System.out.println("-------------------------");
-        System.out.println("Countries with higher than 20% tax");
+        System.out.println("                         ");
         System.out.println("-------------------------");
 
         return result;
@@ -64,8 +65,11 @@ public class CountryList {
             }.reversed());
 
             System.out.println("Write VAT: ");
-            Integer input = Integer.valueOf(scanner.nextInt());
+            input = Integer.valueOf(scanner.nextInt());
 
+            System.out.println("-------------------------");
+            System.out.println("Countries with higher than "+ input +"% tax");
+            System.out.println("-------------------------");
 
             for (Country country : countryList) {
                 if (country.getTax() > input) {
@@ -88,7 +92,10 @@ public class CountryList {
         }
 
 
+    }
 
+    public Integer getInput() {
+        return input;
     }
 
 }

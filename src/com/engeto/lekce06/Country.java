@@ -1,11 +1,14 @@
 package com.engeto.lekce06;
 
+import java.lang.constant.Constable;
+
 public class Country implements Comparable<Country>{
     private String shortName;
     private String countryName;
     private Integer tax;            // Integer namísto obyč. intu kvůli compareTo
     private String reducedTax;
     private boolean specialTax;
+
 
     public Country(String shortName, String countryName, int tax, String reducedTax, boolean specialTax) {
         this.shortName = shortName;
@@ -56,13 +59,11 @@ public class Country implements Comparable<Country>{
     }
 
 
+
     @Override
     public int compareTo(Country o) {
         return 0;
     }
 
-    @Override
-    public String toString() {
-        return countryName + " ("+ shortName + "): " + tax + "% \n";
-    }
+
 }
