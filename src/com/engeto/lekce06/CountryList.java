@@ -56,7 +56,6 @@ public class CountryList {
     }
 
     public void createCopy (String filename, String delimiter){
-
         try(BufferedWriter writer = new BufferedWriter(new FileWriter(filename))){
             List<Country> result = new ArrayList<>();
             Collections.sort(countryList, new Comparator<Country>() {
@@ -66,7 +65,7 @@ public class CountryList {
                 }
             }.reversed());
 
-            num = Integer.parseInt(input);
+
 
             System.out.println("-------------------------");
             System.out.println("Countries with higher than "+ num +"% tax");
@@ -95,11 +94,16 @@ public class CountryList {
 
     }
 
-    public String getInput() {
-        System.out.printf("Write VAT: \n");
-        input = scanner.nextLine();
-        if(input.isEmpty()){
-            input = "20";
+    public String getInput() throws TaxException{
+        try {
+            System.out.printf("Write VAT: \n");
+            input = scanner.nextLine();
+            if (input.isEmpty()) {
+                input = "20";
+            }
+            num = Integer.parseInt(input);
+        }catch (NumberFormatException ex){
+            System.out.println("Only numbers without dots and commas please ! " + ex.getMessage());
         }
         return input;
     }

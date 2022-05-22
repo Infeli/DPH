@@ -10,7 +10,7 @@ public class Main {
     static Logger logger = Logger.getLogger("com.engeto.lekce06");
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws TaxException {
 
         CountryList country = null;
 
@@ -33,8 +33,6 @@ public class Main {
             }catch (Exception ex){
             logger.warning("Copy has not been created " + numberCopy + ex.getMessage());
         }
-
-
 
 
 
