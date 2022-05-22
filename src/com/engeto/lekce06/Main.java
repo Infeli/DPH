@@ -6,14 +6,6 @@ public class Main {
 
     public static final String FILENAME = "vat-eu.csv";
     public static final String DELIMITER = "\t";
-    public static String COPYFILE = "vat-over-.txt";
-
-    // napadlo mě, něco takového na vytažení inputu, který uživatel zadá a poté použít parse a vložit do názvu, ale nepřišel jsem na to jak
-//    public static Integer num = new CountryList().getInput();
-//    public static String fileNum = Integer.toString(num);
-
-
-
 
     static Logger logger = Logger.getLogger("com.engeto.lekce06");
 
@@ -33,11 +25,15 @@ public class Main {
 
         // vytvoření kopie souboru
 
+        String numberCopy = "vat-over-"+country.getInput()+".txt";
+
         try {
-            country.createCopy(COPYFILE, DELIMITER);
-        }catch (Exception ex){
-            logger.warning("Copy has not been created " + FILENAME + ex.getMessage());
+            country.createCopy(numberCopy, DELIMITER);
+
+            }catch (Exception ex){
+            logger.warning("Copy has not been created " + numberCopy + ex.getMessage());
         }
+
 
 
 

@@ -58,12 +58,9 @@ public class Country implements Comparable<Country>{
         this.specialTax = specialTax;
     }
 
-
-
     @Override
     public int compareTo(Country o) {
         return 0;
     }
-
 
 }

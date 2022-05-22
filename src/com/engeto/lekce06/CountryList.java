@@ -8,7 +8,8 @@ import static java.lang.Integer.parseInt;
 public class CountryList {
 
     private static Scanner scanner = new Scanner(System.in);
-    private Integer input;
+    private String input;
+    private Integer num;
 
     private List<Country> countryList = new ArrayList<>(); // tvorba kolekce
 
@@ -51,10 +52,11 @@ public class CountryList {
         System.out.println("-------------------------");
 
         return result;
+
     }
 
-
     public void createCopy (String filename, String delimiter){
+
         try(BufferedWriter writer = new BufferedWriter(new FileWriter(filename))){
             List<Country> result = new ArrayList<>();
             Collections.sort(countryList, new Comparator<Country>() {
@@ -64,15 +66,14 @@ public class CountryList {
                 }
             }.reversed());
 
-            System.out.println("Write VAT: ");
-            input = Integer.valueOf(scanner.nextInt());
+            num = Integer.parseInt(input);
 
             System.out.println("-------------------------");
-            System.out.println("Countries with higher than "+ input +"% tax");
+            System.out.println("Countries with higher than "+ num +"% tax");
             System.out.println("-------------------------");
 
             for (Country country : countryList) {
-                if (country.getTax() > input) {
+                if (country.getTax() > num) {
                     System.out.println(country.getCountryName() + " (" + country.getShortName() + "): " + country.getTax() + "%");
                     writer.write(country.getCountryName() + " (" + country.getShortName() + "): " + country.getTax() + "% \n");
                 }
@@ -80,7 +81,7 @@ public class CountryList {
             System.out.println("=========================");
             writer.write("=========================\n");
             for (Country country : countryList) {
-                if (country.getTax() <= input) {
+                if (country.getTax() <= num) {
                     System.out.print(country.getShortName() + ", ");
                     writer.write(country.getShortName() + ", ");
                 }
@@ -94,7 +95,12 @@ public class CountryList {
 
     }
 
-    public Integer getInput() {
+    public String getInput() {
+        System.out.printf("Write VAT: \n");
+        input = scanner.nextLine();
+        if(input.isEmpty()){
+            input = "20";
+        }
         return input;
     }
 
