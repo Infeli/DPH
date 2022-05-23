@@ -1,7 +1,5 @@
 package com.engeto.lekce06;
 
-import java.lang.constant.Constable;
-
 public class Country implements Comparable<Country>{
     private String shortName;
     private String countryName;

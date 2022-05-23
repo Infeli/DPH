@@ -11,7 +11,7 @@ public class CountryList {
     private String input;
     private Integer num;
 
-    private List<Country> countryList = new ArrayList<>(); // tvorba kolekce
+    private List<Country> countryList = new ArrayList<>(); // vytvoření kolekce
 
     public static CountryList importCountry(String filename, String delimiter) throws TaxException {
         String nextLine = "";
@@ -55,45 +55,6 @@ public class CountryList {
 
     }
 
-    public void createCopy (String filename, String delimiter){
-        try(BufferedWriter writer = new BufferedWriter(new FileWriter(filename))){
-            List<Country> result = new ArrayList<>();
-            Collections.sort(countryList, new Comparator<Country>() {
-                @Override
-                public int compare(Country o1, Country o2) {
-                    return o1.getTax().compareTo(o2.getTax());
-                }
-            }.reversed());
-
-
-
-            System.out.println("-------------------------");
-            System.out.println("Countries with higher than "+ num +"% tax");
-            System.out.println("-------------------------");
-
-            for (Country country : countryList) {
-                if (country.getTax() > num) {
-                    System.out.println(country.getCountryName() + " (" + country.getShortName() + "): " + country.getTax() + "%");
-                    writer.write(country.getCountryName() + " (" + country.getShortName() + "): " + country.getTax() + "% \n");
-                }
-            }
-            System.out.println("=========================");
-            writer.write("=========================\n");
-            for (Country country : countryList) {
-                if (country.getTax() <= num) {
-                    System.out.print(country.getShortName() + ", ");
-                    writer.write(country.getShortName() + ", ");
-                }
-            }
-
-        }catch (Exception ex){
-            ex.getMessage();
-
-        }
-
-
-    }
-
     public String getInput() throws TaxException{
         try {
             System.out.printf("Write VAT: \n");
@@ -106,6 +67,48 @@ public class CountryList {
             System.out.println("Only numbers without dots and commas please ! " + ex.getMessage());
         }
         return input;
+    }
+
+    public void createCopy (String filename, String delimiter){
+
+        if(num == (int)num) {
+
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename))) {
+
+                List<Country> result = new ArrayList<>();
+
+                Collections.sort(countryList, new Comparator<Country>() {
+                    @Override
+                    public int compare(Country o1, Country o2) {
+                        return o1.getTax().compareTo(o2.getTax());
+                    }
+                }.reversed());
+
+                System.out.println("-------------------------");
+                System.out.println("Countries with higher than " + num + "% tax");
+                System.out.println("-------------------------");
+
+                for (Country country : countryList) {
+                    if (country.getTax() > num) {
+                        System.out.println(country.getCountryName() + " (" + country.getShortName() + "): " + country.getTax() + "%");
+                        writer.write(country.getCountryName() + " (" + country.getShortName() + "): " + country.getTax() + "% \n");
+                    }
+                }
+                System.out.println("=========================");
+                writer.write("=========================\n");
+                for (Country country : countryList) {
+                    if (country.getTax() <= num) {
+                        System.out.print(country.getShortName() + ", ");
+                        writer.write(country.getShortName() + ", ");
+                    }
+                }
+
+            } catch (Exception ex) {
+                ex.getMessage();
+
+            }
+        }
+
     }
 
 }

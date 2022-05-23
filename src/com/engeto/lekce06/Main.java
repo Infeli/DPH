@@ -30,7 +30,7 @@ public class Main {
         try {
             country.createCopy(numberCopy, DELIMITER);
 
-            }catch (Exception ex){
+        }catch (Exception ex){
             logger.warning("Copy has not been created " + numberCopy + ex.getMessage());
         }
 
