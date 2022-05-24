@@ -43,7 +43,10 @@ public class CountryList {
 
             }
 
-        } catch (FileNotFoundException ex) {
+        } catch (NumberFormatException ex){
+            throw new TaxException("Incorrect number format !" + items[2] + " on the line: " + lineNumber + ex.getLocalizedMessage());
+        }
+        catch (FileNotFoundException ex) {
             throw new TaxException("File: " + filename + " has not been found ... " + ex.getLocalizedMessage());
         }
 
